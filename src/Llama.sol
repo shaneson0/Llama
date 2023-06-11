@@ -30,16 +30,6 @@ contract Llama is Ownable, ERC20 {
     ) internal override {
         if (from == pool || to == pool ) {
             require(hashmap[tx.origin] != block.number, "Detect MEV!");
-        }
-    }
-
-    // aggregator => user 
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 
-    ) internal override {
-        if (from == pool || to == pool) {
             hashmap[tx.origin] =  block.number;
         }
     }
